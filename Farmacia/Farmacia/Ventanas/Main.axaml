@@ -1,0 +1,157 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Farmacia.Main"
+        Title="Main">
+	<ScrollViewer>
+		<TabControl>
+			<TabItem Header="Ingresar producto">
+
+				<TabControl>
+					<TabItem Header="Medicamentos">
+						<StackPanel>
+							<TextBlock> Id del producto </TextBlock>
+							<TextBox x:Name="MED_ID" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el id del producto"></TextBox>
+							<TextBlock> Nombre del producto </TextBlock>
+							<TextBox x:Name="MED_NAME" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el nombre del producto"></TextBox>
+							<TextBlock> Precio </TextBlock>
+							<TextBox x:Name="MED_PRICE" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el precio "></TextBox>
+							<TextBlock> Peso </TextBlock>
+							<TextBox x:Name="MED_PESO" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el peso"></TextBox>
+							<TextBlock> Laboratorio </TextBlock>
+							<TextBox x:Name="MED_LAB" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el laboratorio"></TextBox>
+							<TextBlock> BIOEQUIVALENTE </TextBlock>
+							<TextBox x:Name="MED_BIO" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el bioequivalente"></TextBox>
+							<TextBlock Margin="0 10 0 5">Ingrese si requiere receta</TextBlock>
+
+							<RadioButton GroupName="RequiereRecetaGrupo"
+										 Content="Sí"
+										 Checked="RadioButton_Checked"/>
+							<RadioButton GroupName="RequiereRecetaGrupo"
+										 Content="No"
+										 Checked="RadioButton_Checked"/>
+
+							<StackPanel x:Name="ControlesReceta" IsVisible="False" Margin="0 10 0 0">
+								<TextBlock>Ingrese el id de la Receta:</TextBlock>
+								<TextBox x:Name="RECETA_ID" Margin="5" Watermark="Ingrese los detalles de la receta"></TextBox>
+
+								<TextBlock>Ingrese el Nombre del Medico Responsable:</TextBlock>
+								<TextBox x:Name="RECETA_MED" Margin="5" Watermark="Ingrese el nombre del responsable"></TextBox>
+
+								<TextBlock>Fecha de receta:</TextBlock>
+								<DatePicker x:Name="RECETA_FECHA" Margin="5"/>
+							</StackPanel>
+							<Button Click="OnClickAgregarMedicamento">Agregar Medicamento</Button>
+
+						</StackPanel>
+
+					</TabItem>
+					<TabItem Header="Dermocosmeticos">
+						<StackPanel>
+							<TextBlock>Id del dermocosmético</TextBlock>
+							<TextBox x:Name="DERM_ID" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el id del producto"></TextBox>
+
+							<TextBlock>Nombre del dermocosmético</TextBlock>
+							<TextBox x:Name="DERM_NAME" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el nombre del producto"></TextBox>
+
+							<TextBlock>Precio</TextBlock>
+							<TextBox x:Name="DERM_PRICE" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el precio"></TextBox>
+
+							<TextBlock>Peso</TextBlock>
+							<TextBox x:Name="DERM_PESO" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el peso"></TextBox>
+
+							<TextBlock>Tipo de piel</TextBlock>
+							<RadioButton GroupName="TipoPielGrupo"
+										 Content="Mixta"
+										 Checked="TipoPiel_Checked"/>
+							<RadioButton GroupName="TipoPielGrupo"
+										 Content="Seca"
+										 Checked="TipoPiel_Checked"/>
+							<RadioButton GroupName="TipoPielGrupo"
+										 Content="Grasa"
+										 Checked="TipoPiel_Checked"/>
+							<RadioButton GroupName="TipoPielGrupo"
+										 Content="Sensible"
+										 Checked="TipoPiel_Checked"/>
+
+							<Button Click="OnClickAgregarDermocosmetico">Agregar dermocosmético</Button>
+						</StackPanel>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<TabItem Header="Carrito de Productos">
+				<TabControl>
+
+					<StackPanel>
+						<TextBlock Margin="5">Carrito</TextBlock>
+						<TextBlock Margin="" x:Name="CarritoCliente"></TextBlock>
+
+						<TextBlock Margin="5"> Id del Producto </TextBlock>
+						<TextBox x:Name="PROD_ID" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el id del medicamento"/>
+
+						<TextBlock Margin="5"> Nombre del Producto </TextBlock>
+						<TextBox x:Name="PROD_NAME" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Watermark="Ingrese el nombre del medicamento"/>
+
+
+
+						<Button Content="Agregar Producto" Margin="5" Click="OnClickAgregarProductoCarrito" HorizontalAlignment="Left" />
+
+						<TextBlock Margin="5" FontWeight="Bold" FontSize="16">Lista de Productos en la Sucursal:</TextBlock>
+						<ListBox x:Name="ListProductos">
+
+						</ListBox>
+					</StackPanel>
+
+				</TabControl>
+			</TabItem>
+			<TabItem Header="Venta">
+				<TabControl>
+					<TabItem Header="Realizar venta">
+
+						<StackPanel>
+
+							<TextBlock Margin="5">Carrito</TextBlock>
+							<TextBlock Margin="" x:Name="CarritoFinal"></TextBlock>
+
+
+							<TextBlock> Ingrese el nombre del cliente</TextBlock>
+							<TextBox x:Name="CLIENTE_NOMBRE" VerticalAlignment="Top" HorizontalAlignment="Left" Watermark="Nombre del cliente"></TextBox>
+							<TextBlock>Ingrese el rut del cliente</TextBlock>
+							<TextBox x:Name="CLIENTE_RUT" VerticalAlignment="Top" HorizontalAlignment="Left" Watermark="Rut sin puntos ni guion"></TextBox>
+							<TextBlock> Ingrese la fecha de nacimiento</TextBlock>
+							<DatePicker x:Name="Fecha_nacimiento_cliente"></DatePicker>
+
+							<TextBlock>Metodo de Pago</TextBlock>
+							<RadioButton GroupName="TipoDePago"
+										 Content="Efectivo"
+										 Checked="TipoDePago_Checked"/>
+							<RadioButton GroupName="TipoDePago"
+										 Content="Credito"
+										 Checked="TipoDePago_Checked"/>
+							<RadioButton GroupName="TipoDePago"
+										 Content="Debito"
+										 Checked="TipoDePago_Checked"/>
+							<RadioButton GroupName="TipoDePago"
+										 Content="Transferencia"
+										 Checked="TipoDePago_Checked"/>
+							<StackPanel>
+
+								<Button Click="OnClickFinalizarAtencion"> Finalizar la venta </Button>
+
+								<TextBlock Margin="20" x:Name="BoletaFinal"></TextBlock>
+
+							</StackPanel>
+						</StackPanel>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<TabItem Header="Cerrar Sesion">
+				<StackPanel>
+					<Button Click="OnClickCerrarSesion"> Cerrar sesion </Button>
+				</StackPanel>
+			</TabItem>
+		</TabControl>
+	</ScrollViewer>
+</Window>
